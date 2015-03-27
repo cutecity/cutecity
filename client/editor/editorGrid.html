@@ -1,0 +1,11 @@
+<template name="editorGrid">
+  <svg xmlns="http://www.w3.org/2000/svg" width="{{gridWidth}}" height="{{gridHeight}}" class="editor-grid">
+    <g transform="matrix(-0.707 0.409 0.707 0.409 {{gridOffset}} 0)">
+      {{#each grid}}
+        {{#each this}}
+          <rect x="{{xdim}}" y="{{ydim}}" width="{{size}}" height="{{size}}"></rect>
+        {{/each}}
+      {{/each}}
+    </g>
+  </svg>
+</template>
