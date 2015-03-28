@@ -1,6 +1,19 @@
+Blocks = new Meteor.Collection('blocks');
 Models = new Meteor.Collection('models');
-Structures = new Meteor.Collection('structures');
+Towers = new Meteor.Collection('towers');
 Cities = new Meteor.Collection('cities');
+
+Blocks.allow({
+  insert: function() {
+    return true;
+  },
+  update: function() {
+    return true;
+  },
+  remove: function() {
+    return true;
+  }
+});
 
 Models.allow({
   insert: function() {
@@ -14,7 +27,7 @@ Models.allow({
   }
 });
 
-Structures.allow({
+Towers.allow({
   insert: function() {
     return true;
   },

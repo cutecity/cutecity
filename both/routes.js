@@ -11,7 +11,11 @@ Router.route('/', function () {
 Router.route('/edit/new', function () {
   this.render('editorNew');
 }, {
-  name: 'editor.new'
+  name: 'editor.new',
+
+  subscriptions: function () {
+    this.subscribe('blocks');
+  }
 });
 
 // #TODO:
