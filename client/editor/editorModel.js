@@ -17,5 +17,6 @@ Template.editorModel.rendered = function () {
   });
 
   // Base
-  iso.add(Isomer.Shape.Prism(Isomer.Point.ORIGIN, Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Isomer.Color(200, 200, 200));
+  iso.add(Isomer.Shape.Prism(Isomer.Point.ORIGIN, Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Isomer.Color(200, 200, 200), true);
+  iso.draw();
 }

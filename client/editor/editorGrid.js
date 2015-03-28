@@ -30,11 +30,14 @@ Template.editorGrid.helpers({
 
 var Shape = Isomer.Shape;
 var Point = Isomer.Point;
+var Color = Isomer.Color;
 
 Template.editorGrid.events = {
   'mouseover .editor-grid rect': function () {
     console.log(this.x, this.y);
-
-    iso.add(Shape.Prism(new Point(this.x, this.y, 0)));
+    var color = new Color(200, 0, 200);
+    iso.canvas.clear();
+    iso.add(Shape.Prism(new Point(this.x, this.y, 0)), color, true);
+    iso.draw();
   }
 };
