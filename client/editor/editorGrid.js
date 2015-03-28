@@ -64,22 +64,25 @@ function hexToRgb(hex) {
     ];
 }
 
-var renderAll = function (blocks) {
-  console.log(blocks.length);
-
+var throttledDraw = _.throttle(function () {
   iso.canvas.clear();
-
-  blocks.map(function (block) {
-    rgb = hexToRgb(block.color)
-    iso.add(Shape.Prism(new Point(block.x, block.y, block.z)), new Color(rgb[0], rgb[1], rgb[2]), true);
-  });
-
   iso.draw();
+}, 100);
+
+var render = function (block) {
+  rgb = hexToRgb(block.color)
+  iso.add(Shape.Prism(new Point(block.x, block.y, block.z)), new Color(rgb[0], rgb[1], rgb[2]), true);
+  throttledDraw();
 }
 
-LoadAll = function () {
-  var data = Blocks.find({}).fetch();
-  renderAll(data);
-};
+Template.editorGrid.rendered = function () {
+  var cursor = Blocks.find({});
 
-Template.editorGrid.rendered = LoadAll;
+  cursor.observe({
+    added: function (block) {
+      render(block);
+    }
+  });
+
+  var data = cursor.fetch();
+};
