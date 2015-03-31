@@ -10,13 +10,9 @@ Template.editorModel.helpers({
   }
 });
 
-Template.editorModel.rendered = function () {
+Template.editorModel.onRendered(function () {
   var iso = window.iso = new Isomer(this.firstNode, {
     scale: 8,
     originY: window.innerHeight - $('.editor-grid').offset().top
   });
-
-  // Base
-  iso.add(Isomer.Shape.Prism(Isomer.Point.ORIGIN, Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Isomer.Color(200, 200, 200), true);
-  iso.draw();
-}
+});
