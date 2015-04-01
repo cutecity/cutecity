@@ -27,14 +27,3 @@ Template.editorGrid.helpers({
     return ((Session.get('gridSizeY') * rectSize) / 2) / 0.707;
   }
 });
-
-var Shape = Isomer.Shape;
-var Point = Isomer.Point;
-
-Template.editorGrid.events = {
-  'mouseover .editor-grid rect': function () {
-    console.log(this.x, this.y);
-
-    iso.add(Shape.Prism(new Point(this.x, this.y, 0)));
-  }
-};
