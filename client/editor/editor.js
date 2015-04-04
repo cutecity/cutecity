@@ -18,15 +18,17 @@ isoColor = function (hex) {
 }
 
 isoDrawScene = function () {
+  var sliceZ = Session.get('sliceZ');
+
   iso.scene = [];
-  iso.add(Shape.Prism(Point.ORIGIN, Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Color(200, 200, 200), true);
+  iso.add(Shape.Prism(new Point(0, 0, -sliceZ), Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Color(200, 200, 200), true);
 
   var blocks = Blocks.find({}, {
-    sort: {x: -1, y: -1, z: -1}
+    sort: {x: -1, y: -1, z: 1}
   }).fetch();
 
   blocks.map(function (block) {
-    iso.add(Shape.Prism(new Point(block.x, block.y, 0)), isoColor(block.color), true);
+    iso.add(Shape.Prism(new Point(block.x, block.y, block.z - sliceZ)), isoColor(block.color), true);
   });
 
   iso.canvas.clear();

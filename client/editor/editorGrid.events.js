@@ -6,11 +6,12 @@ Template.editorGrid.events = {
   'mouseover .editor-grid rect': function () {
     console.log('Added block.', 'x:', this.x, 'y:', this.y, 'paths:', iso.scene.length);
     var color = new Color(randomByte(), randomByte(), randomByte());
+    var sliceZ = Session.get('sliceZ');
 
     var prev = Blocks.find({
       x: this.x,
       y: this.y,
-      z: 0
+      z: sliceZ
     }).fetch();
 
     if (prev.length) {
@@ -22,7 +23,7 @@ Template.editorGrid.events = {
     var id = Blocks.insert({
       x: this.x,
       y: this.y,
-      z: 0,
+      z: sliceZ,
       color: color.toHex()
     });
 

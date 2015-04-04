@@ -12,7 +12,7 @@ Template.editorModel.helpers({
 
 Template.editorModel.onRendered(function () {
   var iso = window.iso = new Isomer(this.firstNode, {
-    scale: 8,
+    scale: 8.1,
     originY: window.innerHeight - $('.editor-grid').offset().top
   });
 });
