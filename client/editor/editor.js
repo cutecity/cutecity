@@ -2,9 +2,6 @@ Shape = Isomer.Shape;
 Point = Isomer.Point;
 Color = Isomer.Color;
 
-Session.set('gridSizeX', 64);
-Session.set('gridSizeY', 64);
-
 hexToRgb = function (hex) {
   hex = hex.replace(/[^0-9A-F]/gi, '');
   var bigint = parseInt(hex, 16);
