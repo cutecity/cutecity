@@ -19,16 +19,50 @@ isoColor = function (hex) {
 
 isoDrawScene = function () {
   var sliceZ = Session.get('sliceZ');
+  var gridX = Session.get('gridSizeX');
+  var gridY = Session.get('gridSizeY');
+  var rots = [
+    {
+      sortX: 0,
+      sortY: 0,
+      modX: 0,
+      modY: 0
+    },
+    {
+      sortX: 2,
+      sortY: 0,
+      modX: gridX + 1,
+      modY: 0
+    },
+    {
+      sortX: 2,
+      sortY: 2,
+      modX: gridX + 1,
+      modY: gridY + 1
+    },
+    {
+      sortX: 0,
+      sortY: 2,
+      modX: 0,
+      modY: gridY + 1
+    }
+  ];
+
+  var rot = rots[Session.get('rotationIndex')];
 
   iso.scene = [];
-  iso.add(Shape.Prism(new Point(0, 0, -sliceZ), Session.get('gridSizeX'), Session.get('gridSizeY'), 1), new Color(200, 200, 200), true);
+  iso.add(Shape.Prism(new Point(0, 0, -sliceZ), gridX, gridY, 1), new Color(200, 200, 200), true);
 
   var blocks = Blocks.find({}, {
-    sort: {x: -1, y: -1, z: 1}
+    sort: {
+      x: -1 + rot.sortX,
+      y: -1 + rot.sortY,
+      z: 1
+    }
   }).fetch();
 
   blocks.map(function (block) {
-    iso.add(Shape.Prism(new Point(block.x, block.y, block.z - sliceZ)), isoColor(block.color), true);
+    iso.add(Shape.Prism(new Point(Math.abs(rot.modX - block.x), Math.abs(rot.modY - block.y), block.z - sliceZ)), isoColor(block.color), true);
   });
 
   iso.canvas.clear();
