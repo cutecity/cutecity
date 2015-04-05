@@ -1,6 +1,6 @@
 $(window).load(function() {
   $(window).on('keydown', function(evt) {
-    console.log(evt.which);
+    console.log('keycode', evt.which);
 
     // slice down
 
